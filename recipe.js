@@ -78,3 +78,16 @@ const listRecipes = (filteredRecipes) => {
 // Invoking/Calling the function
 listRecipes(recipes)
 
+
+// Event listeners for filters
+document.querySelectorAll('.filter-buttons button').forEach(button => {
+  button.addEventListener('click', (event) => {
+    const cuisine = event.target.textContent;
+    if (cuisine === 'All') {
+      listRecipes(recipes);
+    } else {
+      const filtered = recipes.filter(recipe => recipe.cuisine === cuisine);
+      listRecipes(filtered);
+    }
+  });
+});
