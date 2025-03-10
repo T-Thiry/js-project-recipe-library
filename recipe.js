@@ -64,7 +64,7 @@ const listRecipes = (filteredRecipes) => {
         <h2>${recipe.name}</h2>
         <hr>
         <h3>Cuisine: ${recipe.cuisine}</h3>
-        <h3>Cooking time: ${recipe.time}</h3>
+        <h3>Cooking time: ${recipe.time} minutes</h3>
         <hr>
         <p>Ingredients:</p>
         <ul>
