@@ -78,7 +78,6 @@ const listRecipes = (filteredRecipes) => {
 // Invoking/Calling the function
 listRecipes(recipes)
 
-
 // Event listeners for filters
 document.querySelectorAll('.filter-buttons button').forEach(button => {
   button.addEventListener('click', (event) => {
@@ -91,3 +90,18 @@ document.querySelectorAll('.filter-buttons button').forEach(button => {
     }
   });
 });
+
+// Event listeners for sort buttons
+document.querySelectorAll('.sort-buttons button').forEach(button => {
+  button.addEventListener('click', (event) => {
+    const sortType = event.target.textContent;
+    if (sortType === 'Ascending') {
+      const filtered = recipes.filter(recipe => recipe.time >= 30);
+      listRecipes(filtered);
+    } else if (sortType === 'Descending') {
+      const filtered = recipes.filter(recipe => recipe.time < 30);
+      listRecipes(filtered);
+    }
+  });
+});
+
