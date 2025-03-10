@@ -51,3 +51,30 @@ const recipes = [
     ingredients: ['2 Tomatoes', '1/2 Cucumber', '1 Red onion', '1/4 Red cabbage', '1 Pomegranate', '200g Corn']
   }
 ];
+
+// Function to display recipes
+const listRecipes = (filteredRecipes) => {
+  const container = document.querySelector('.recipe-container');
+  container.innerHTML = '';
+
+  filteredRecipes.forEach(recipe => {
+    container.innerHTML += `
+      <div class="recipe-card">
+        <img src="${recipe.image}" alt="${recipe.name}">
+        <h2>${recipe.name}</h2>
+        <hr>
+        <h3>Cuisine: ${recipe.cuisine}</h3>
+        <h3>Cooking time: ${recipe.time}</h3>
+        <hr>
+        <p>Ingredients:</p>
+        <ul>
+          ${recipe.ingredients.map(item => `<li>${item}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+  });
+}
+
+// Invoking/Calling the function
+listRecipes(recipes)
+
