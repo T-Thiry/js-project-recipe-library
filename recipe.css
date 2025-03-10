@@ -66,3 +66,63 @@ object-fit: cover; /* Ensure the image covers the area without disorting */
 object-position: center; /* Center the image if it gets cropped */
 }
 
+.recipe-card h2 {
+  font-size: 1.2rem;
+  margin: 16px 20px 10px 20px;
+}
+
+.recipe-card h3 {
+  font-size: 1rem;
+  margin: 10px 20px;
+}
+
+.recipe-card p {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 10px 20px;
+}
+
+.recipe-card ul li {
+  list-style: none;
+  margin: 0 20px;
+}
+
+.recipe-card hr {
+  background-color: lightgrey;
+  width: 84%;
+  align-self: center;
+}
+
+
+/* Media Querie Mobile Device */
+@media (min-width: 320px) and (max-width: 480px) {
+.recipe-container {
+  grid-template-columns: 1fr;
+}
+
+.revipe-card {
+  grid-column: 1;
+}
+}
+
+/* Media Querie Mobile Device */
+@media (min-width: 481px) and (max-width: 768px) {
+  .recipe-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Media Querie Mobile Device */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .recipe-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Media Querie Mobile Device */
+@media (min-width: 1024px) and (max-width: 1600px) {
+  .recipe-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
