@@ -14,9 +14,8 @@ h1 {
 }
 
 
-/* Filtering & sorting button starts here */
-
-#filter-btn {
+/* Filter buttons starts here */
+.filter-btn {
   background-color: rgb(224, 238, 185);
   font-size: 0.9rem;
   padding: 8px 16px;
@@ -25,7 +24,19 @@ h1 {
   border-radius: 20px;
 }
 
-#sort-btn {
+.filter-buttons button:hover {
+  background-color: rgb(190, 208, 138); /* Orange hover */
+  cursor: pointer;
+}
+
+.filter-buttons button.selected {
+  background-color: #333; 
+  color: white;
+}
+
+
+/* Sort buttons starts here */
+.sort-btn {
   background-color: rgb(239, 210, 162);
   font-size: 0.9rem;
   padding: 8px 16px;
@@ -38,9 +49,19 @@ h1 {
   margin-top: 10px;
 }
 
+.sort-btn:hover {
+  background-color: rgb(217, 187, 138); /* Orange hover */
+  cursor: pointer;
+}
+
+.sort-btn.selected {
+  background-color: #333; /* Darker orange */
+  color: white;
+}
+
+
 
 /* Recipe starts here */
-
 .recipe-container {
   display: grid;
   grid-template-columns: repeat(autofit,minmax(200px, 1fr));
@@ -100,7 +121,7 @@ object-position: center; /* Center the image if it gets cropped */
   grid-template-columns: 1fr;
 }
 
-.revipe-card {
+.recipe-card {
   grid-column: 1;
 }
 }
