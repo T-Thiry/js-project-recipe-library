@@ -75,6 +75,11 @@ h1 {
   color: white;
 }
 
+.no-match h2 {
+  margin: 20px 0;
+  color: rgb(215, 0, 0);
+}
+
 /* Recipe starts here */
 .recipe-container {
   display: grid;

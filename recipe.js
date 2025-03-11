@@ -17,8 +17,8 @@ const recipes = [
       '500g Black mussels', 
       '300g Shrimps (peeled)',
       '2 Tomatoes', 
-      '3 tbs Olive oil', 
-      '1 glove Basil leaves (for garnish)'
+      //'3 tbs Olive oil', 
+      //'1 glove Basil leaves (for garnish)'
     ]
   },
   {
@@ -36,7 +36,7 @@ const recipes = [
       '4 anchovy fillets (minced)', 
       '2 Garlic (gloves)',
       '3 tbs Olive oil',
-      'Salt (pinch)'
+      //'Salt (pinch)'
     ]
   },
   {
@@ -88,9 +88,9 @@ const recipes = [
       '2 Tomatoes', 
       '1/2 Cucumber', 
       '150g Feta cheese', 
-      '1 Red onion', 
-      '300g Black olives', 
-      '3 tbs Olive oil'
+      //'1 Red onion', 
+      //'300g Black olives', 
+      //'3 tbs Olive oil'
     ]
   },
   {
@@ -117,8 +117,16 @@ const recipes = [
 // Function to display recipes
 const listRecipes = (filteredRecipes) => {
   const container = document.querySelector('.recipe-container');
+  const noMatchMessage = document.querySelector('.no-match');
   container.innerHTML = '';
 
+// If no recipes are found, show the no-match message (only for no match)
+  if (filteredRecipes.length === 0) {
+    noMatchMessage.style.display = 'block';
+  } else {
+    noMatchMessage.style.display = 'none';
+
+// Display the recipes
   filteredRecipes.forEach(recipe => {
     container.innerHTML += `
       <div class="recipe-card">
@@ -136,6 +144,7 @@ const listRecipes = (filteredRecipes) => {
     `;
   });
 }
+};
 
 // Invoking/Calling the function
 listRecipes(recipes)
@@ -164,16 +173,21 @@ document.querySelectorAll('.sort-buttons button').forEach(button => {
    // Add 'selected' class to the clicked button
    event.target.classList.add('selected');
 
+
+// From longest to shortest cooking time
    const sortType = event.target.textContent;
-   if (sortType === 'Ascending') {
-     const filtered = recipes.filter(recipe => recipe.time >= 30);
-     listRecipes(filtered);
-   } else if (sortType === 'Descending') {
-     const filtered = recipes.filter(recipe => recipe.time < 30);
-     listRecipes(filtered);
+   if (sortType === 'Descending') {
+     // Sort recipes by number of ingredients (most to least)
+     const sorted = [...recipes].sort((a, b) => b.time - a.time);
+     listRecipes(sorted);
+   } else if (sortType === 'Ascending') {
+     // Sort recipes by number of ingredients (least to most)
+     const sorted = [...recipes].sort((a, b) => a.time - b.time);
+     listRecipes(sorted);
    }
  });
 });
+
 
 // Random recipe button
 document.querySelector('.random-button').addEventListener('click', (event) => {
@@ -185,3 +199,36 @@ document.querySelector('.random-button').addEventListener('click', (event) => {
   const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)];
   listRecipes([randomRecipe]);
 });
+
+
+/* Ingreients length, change the number of ingredients to see difference
+
+   const sortType = event.target.textContent;
+   if (sortType === 'Descending') {
+     // Sort recipes by number of ingredients (most to least)
+     const sorted = [...recipes].sort((a, b) => b.ingredients.length - a.ingredients.length);
+     listRecipes(sorted);
+   } else if (sortType === 'Ascending') {
+     // Sort recipes by number of ingredients (least to most)
+     const sorted = [...recipes].sort((a, b) => a.ingredients.length - b.ingredients.length);
+     listRecipes(sorted);
+   }
+ });
+});
+
+*/
+
+   /* Based on time and whether its is equal or more than/less than 30 minutes
+
+   const sortType = event.target.textContent;
+   if (sortType === 'Ascending') {
+     const filtered = recipes.filter(recipe => recipe.time >= 30);
+     listRecipes(filtered);
+   } else if (sortType === 'Descending') {
+     const filtered = recipes.filter(recipe => recipe.time < 30);
+     listRecipes(filtered);
+   }
+ });
+});
+
+*/
