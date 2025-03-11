@@ -175,4 +175,13 @@ document.querySelectorAll('.sort-buttons button').forEach(button => {
  });
 });
 
+// Random recipe button
+document.querySelector('.random-button').addEventListener('click', (event) => {
+  document.querySelectorAll('button').forEach(btn => btn.classList.remove('selected'));
 
+  // Add 'selected' class to the random button
+  event.target.classList.add('selected');
+
+  const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)];
+  listRecipes([randomRecipe]);
+});

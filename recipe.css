@@ -29,11 +29,6 @@ h1 {
   cursor: pointer;
 }
 
-.filter-buttons button.selected {
-  background-color: #333; 
-  color: white;
-}
-
 
 /* Sort buttons starts here */
 .sort-btn {
@@ -50,16 +45,35 @@ h1 {
 }
 
 .sort-btn:hover {
-  background-color: rgb(217, 187, 138); /* Orange hover */
+  background-color: rgb(217, 187, 138); 
   cursor: pointer;
 }
 
-.sort-btn.selected {
-  background-color: #333; /* Darker orange */
-  color: white;
+/* Random button starts here */
+.random-btn {
+  background-color: rgb(216, 183, 241);
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 20px;
 }
 
+.random-button h2 {
+  margin-top: 10px;
+}
 
+.random-btn:hover {
+  background-color: rgb(193, 146, 228);
+  cursor: pointer;
+}
+
+.filter-buttons button.selected,
+.sort-btn.selected,
+.random-btn.selected {
+  background-color: #333; 
+  color: white;
+}
 
 /* Recipe starts here */
 .recipe-container {
