@@ -1,3 +1,124 @@
+const BASE_URL = "https://api.spoonacular.com/recipes/random"
+const API_KEY = "54e612ce8ca44cd3b9e1c1f233a477a1"
+const URL = `${BASE_URL}/?apiKey=${API_KEY}&number=40`
+
+
+let allRecipes = []; // Store recipes globally
+
+// Function to fetch random recipes from Spoonacular API
+const fetchRecipes = async () => {
+  try {
+    const response = await fetch(URL);
+    if (!response.ok) {
+      throw new Error(`Error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("data", data);
+
+    // Filter valid recipes
+    allRecipes = data.recipes.filter((recipe) => {
+      return recipe.cuisines.length > 0 && recipe.image && recipe.title;
+    });
+
+    console.log(allRecipes);
+
+    // Render valid recipes in DOM
+    renderRecipes(allRecipes);
+
+  } catch (error) {
+    console.error("error", error.message);
+  }
+};
+
+// Function to render recipes in the DOM
+const renderRecipes = (recipes) => {
+  const oldContainer = document.getElementById("recipes-container");
+  if (oldContainer) {
+    oldContainer.remove();
+  }
+
+  const container = document.createElement("div");
+  container.id = "recipes-container";
+
+  recipes.forEach((recipe) => {
+    const recipeCard = document.createElement("div");
+    recipeCard.className = "recipe-card";
+
+    recipeCard.innerHTML = `
+      <img src="${recipe.image}" alt="${recipe.title}" />
+      <h2>${recipe.title}</h2>
+      <hr />
+      <p>Cuisines: ${recipe.cuisines.join(", ")}</p>
+      <h3>Cooking time: ${recipe.readyInMinutes} minutes</h3>
+      <hr />
+      <p>Ingredients:</p>
+      <ul>
+        ${Array.isArray(recipe.extendedIngredients)
+        ? recipe.extendedIngredients.map((item) => `<li>${item.original}</li>`).join("")
+        : "<li>No ingredients available</li>"
+      }
+      </ul>
+    `;
+
+    container.appendChild(recipeCard);
+  });
+  document.body.appendChild(container);
+};
+
+fetchRecipes();
+
+// Event listeners for filtering buttons
+document.querySelectorAll(".filter-buttons button").forEach((button) => {
+  button.addEventListener("click", (event) => {
+    document.querySelectorAll(".filter-buttons button").forEach((btn) => btn.classList.remove("selected"));
+    event.target.classList.add("selected");
+    const cuisine = event.target.textContent; // Get the selected cuisine
+    if (cuisine === "All") {
+      renderRecipes(allRecipes);
+    } else {
+      const filtered = allRecipes.filter(
+        (recipe) => recipe.cuisines && recipe.cuisines.includes(cuisine));
+      renderRecipes(filtered);
+    }
+  });
+});
+
+// Event listeners for sorting buttons
+document.querySelectorAll('.sort-buttons button').forEach(button => {
+  button.addEventListener('click', (event) => {
+    document.querySelectorAll('.sort-buttons button').forEach(btn => btn.classList.remove('selected'));
+    event.target.classList.add('selected');
+
+    // Sort recipes from longest to shortest cooking time and vice versa
+    const sortType = event.target.textContent;
+    if (sortType === 'Descending') {
+      const sorted = [...allRecipes].sort((a, b) => b.readyInMinutes - a.readyInMinutes);
+      renderRecipes(sorted);
+    } else if (sortType === 'Ascending') {
+      const sorted = [...allRecipes].sort((a, b) => a.readyInMinutes - b.readyInMinutes);
+      renderRecipes(sorted);
+    }
+  });
+});
+
+
+// Random recipe button
+document.querySelector('.random-button').addEventListener('click', (event) => {
+  document.querySelectorAll('button').forEach(btn => btn.classList.remove('selected'));
+
+  // Add 'selected' class to the random button
+  event.target.classList.add('selected');
+
+  const randomRecipe = allRecipes[Math.floor(Math.random() * allRecipes.length)];
+  renderRecipes([randomRecipe]);
+});
+
+
+
+
+/* This section is commented out
+
 console.log("script is connected")
 
 //Array of recipe objects
@@ -231,4 +352,4 @@ document.querySelector('.random-button').addEventListener('click', (event) => {
  });
 });
 
-*/
+This section is commented out */
