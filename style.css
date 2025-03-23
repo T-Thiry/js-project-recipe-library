@@ -187,21 +187,21 @@ body {
 }
 }
 
-/* Media Querie Mobile Device */
+/* Media Querie Tablet Device */
 @media (min-width: 481px) and (max-width: 768px) {
   #recipes-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Media Querie Mobile Device */
+/* Media Querie Tablets (landscape mode or small laptops) Device */
 @media (min-width: 769px) and (max-width: 1023px) {
   #recipes-container {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* Media Querie Mobile Device */
+/* Media Querie Desktop Device */
 @media (min-width: 1024px) and (max-width: 1600px) {
   #recipes-container {
     grid-template-columns: repeat(4, 1fr);
