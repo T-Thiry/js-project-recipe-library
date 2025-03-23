@@ -13,6 +13,24 @@ h1 {
   margin: 30px 0 40px 0;
 }
 
+/* Hide the quota message initially */
+.hidden {
+  display: none;
+}
+
+/* Show the quota message when quota is exceeded */
+.visible {
+  display: block;
+  background-color: none; /* Light red background to indicate an issue */
+  color: #990000; /* Dark red text */
+  padding: 20px;
+  text-align: center;
+  font-size: 18px;
+  border: 1px solid #990000;
+  margin: 20px 0;
+  border-radius: 5px;
+}
+
 
 /* Filter buttons starts here */
 .filter-btn {

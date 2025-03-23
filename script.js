@@ -1,5 +1,5 @@
 const BASE_URL = "https://api.spoonacular.com/recipes/random"
-const API_KEY = "54e612ce8ca44cd3b9e1c1f233a477a1"
+const API_KEY = "a9fff7010404423db5608a9af2df4a2d"
 const URL = `${BASE_URL}/?apiKey=${API_KEY}&number=40`
 
 
@@ -9,25 +9,43 @@ let allRecipes = []; // Store recipes globally
 const fetchRecipes = async () => {
   try {
     const response = await fetch(URL);
+
     if (!response.ok) {
+      if (response.status === 402) {
+        displayQuotaMessage();  
+        return;
+      }
       throw new Error(`Error! Status: ${response.status}`);
     }
 
     const data = await response.json();
+
+    if (!data.recipes || !Array.isArray(data.recipes)) {
+      throw new Error("Invalid API response: No recipes found.");
+    }
+
     console.log("data", data);
 
     // Filter valid recipes
-    allRecipes = data.recipes.filter((recipe) => {
-      return recipe.cuisines.length > 0 && recipe.image && recipe.title;
-    });
+    allRecipes = data.recipes.filter(
+      (recipe) => recipe && recipe.cuisines && recipe.image && recipe.title
+    );
 
     console.log(allRecipes);
-
-    // Render valid recipes in DOM
     renderRecipes(allRecipes);
 
   } catch (error) {
     console.error("error", error.message);
+    displayQuotaMessage();  
+  }
+};
+
+// Function to display the quota message when API limits are exceeded
+const displayQuotaMessage = () => {
+  const messageElement = document.getElementById("quota-message");
+  if (messageElement) {
+    messageElement.classList.remove("hidden");
+    messageElement.classList.add("visible");
   }
 };
 
@@ -42,8 +60,11 @@ const renderRecipes = (recipes) => {
   container.id = "recipes-container";
 
   recipes.forEach((recipe) => {
+    if (!recipe || !recipe.image) return;
+
     const recipeCard = document.createElement("div");
     recipeCard.className = "recipe-card";
+
 
     recipeCard.innerHTML = `
       <img src="${recipe.image}" alt="${recipe.title}" />
