@@ -106,17 +106,17 @@ document.querySelectorAll(".filter-buttons button").forEach((button) => {
 });
 
 // Event listeners for sorting buttons
-document.querySelectorAll('.sort-buttons button').forEach(button => {
-  button.addEventListener('click', (event) => {
-    document.querySelectorAll('.sort-buttons button').forEach(btn => btn.classList.remove('selected'));
-    event.target.classList.add('selected');
+document.querySelectorAll(".sort-buttons button").forEach(button => {
+  button.addEventListener("click", (event) => {
+    document.querySelectorAll(".sort-buttons button").forEach(btn => btn.classList.remove("selected"));
+    event.target.classList.add("selected");
 
     // Sort recipes from longest to shortest cooking time and vice versa
     const sortType = event.target.textContent;
-    if (sortType === 'Descending') {
+    if (sortType === "Descending") {
       const sorted = [...allRecipes].sort((a, b) => b.readyInMinutes - a.readyInMinutes);
       renderRecipes(sorted);
-    } else if (sortType === 'Ascending') {
+    } else if (sortType === "Ascending") {
       const sorted = [...allRecipes].sort((a, b) => a.readyInMinutes - b.readyInMinutes);
       renderRecipes(sorted);
     }
@@ -125,11 +125,11 @@ document.querySelectorAll('.sort-buttons button').forEach(button => {
 
 
 // Random recipe button
-document.querySelector('.random-button').addEventListener('click', (event) => {
-  document.querySelectorAll('button').forEach(btn => btn.classList.remove('selected'));
+document.querySelector(".random-button").addEventListener("click", (event) => {
+  document.querySelectorAll("button").forEach(btn => btn.classList.remove("selected"));
 
   // Add 'selected' class to the random button
-  event.target.classList.add('selected');
+  event.target.classList.add("selected");
 
   const randomRecipe = allRecipes[Math.floor(Math.random() * allRecipes.length)];
   renderRecipes([randomRecipe]);
