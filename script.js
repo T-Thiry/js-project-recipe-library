@@ -1,5 +1,5 @@
 const BASE_URL = "https://api.spoonacular.com/recipes/random"
-const API_KEY = "ff74005a2bde463dac5f13cd1d0d5ad8"
+const API_KEY = "54e612ce8ca44cd3b9e1c1f233a477a1"
 const URL = `${BASE_URL}/?apiKey=${API_KEY}&number=40`
 
 
