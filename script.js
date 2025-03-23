@@ -1,5 +1,5 @@
 const BASE_URL = "https://api.spoonacular.com/recipes/random"
-const API_KEY = "a9fff7010404423db5608a9af2df4a2d"
+const API_KEY = "ff74005a2bde463dac5f13cd1d0d5ad8"
 const URL = `${BASE_URL}/?apiKey=${API_KEY}&number=40`
 
 
@@ -59,8 +59,15 @@ const renderRecipes = (recipes) => {
   const container = document.createElement("div");
   container.id = "recipes-container";
 
-  recipes.forEach((recipe) => {
-    if (!recipe || !recipe.image) return;
+  // If no recipes found, display a message
+  if (recipes.length === 0) {
+    const noRecipesMessage = document.createElement("p");
+    noRecipesMessage.className = "no-recipes-message";
+    noRecipesMessage.textContent = "No recipes found matching your criteria. Please try a different filter.";
+    container.appendChild(noRecipesMessage);
+    } else {
+      recipes.forEach((recipe) => {
+        if (!recipe || !recipe.image) return;
 
     const recipeCard = document.createElement("div");
     recipeCard.className = "recipe-card";
@@ -84,6 +91,7 @@ const renderRecipes = (recipes) => {
 
     container.appendChild(recipeCard);
   });
+}
   document.body.appendChild(container);
 };
 
